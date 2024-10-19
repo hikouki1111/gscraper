@@ -89,10 +89,10 @@ func (s *Session) Search(query string, page int, lang language.Tag) ([]Result, e
         href, exists := selection.Attr("href")
         if exists && strings.HasPrefix(href, "/url") {
             var title string
-            selection.Find("div").Each(func(indexDiv int, divTag *goquery.Selection) {
-                divTag.Find("div").Each(func(indexH3 int, divTag2 *goquery.Selection) {
-                    divTag2.Find("h3").Each(func(indexH3 int, h3Tag *goquery.Selection) {
-                        h3Tag.Find("div").Each(func(indexH3 int, divTag3 *goquery.Selection) {
+            selection.Find("div").Each(func(index int, divTag *goquery.Selection) {
+                divTag.Find("div").Each(func(index int, divTag2 *goquery.Selection) {
+                    divTag2.Find("h3").Each(func(index int, h3Tag *goquery.Selection) {
+                        h3Tag.Find("div").Each(func(index int, divTag3 *goquery.Selection) {
                             title = divTag3.Text()
                         })
                     })
