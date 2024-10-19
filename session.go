@@ -87,7 +87,7 @@ func (s *Session) Search(query string, page int, lang language.Tag) ([]Result, e
     }
     doc.Find("a").Each(func(i int, selection *goquery.Selection) {
         href, exists := selection.Attr("href")
-        if exists && strings.HasPrefix(href, "/url") && selection.Text() == "" {
+        if exists && strings.HasPrefix(href, "/url") {
             var title string
             selection.Find("div").Each(func(indexDiv int, divTag *goquery.Selection) {
                 divTag.Find("div").Each(func(indexH3 int, divTag2 *goquery.Selection) {
