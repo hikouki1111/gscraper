@@ -91,7 +91,7 @@ func (s *Session) Search(query string, page int, lang language.Tag) ([]Result, e
             var title string
             selection.Find("div").Each(func(indexDiv int, divTag *goquery.Selection) {
                 divTag.Find("h3").Each(func(indexH3 int, h3Tag *goquery.Selection) {
-                    h3Tag.Find("h3").Each(func(indexH3 int, divTag2 *goquery.Selection) {
+                    h3Tag.Find("div").Each(func(indexH3 int, divTag2 *goquery.Selection) {
                         title = divTag2.Text()
                     })
                 })
