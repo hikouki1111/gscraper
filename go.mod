@@ -9,4 +9,5 @@ require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
 	github.com/andybalholm/cascadia v1.3.2 // indirect
 	golang.org/x/net v0.29.0 // indirect
+	golang.org/x/text v0.19.0 // indirect
 )
