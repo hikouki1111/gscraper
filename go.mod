@@ -1,6 +1,6 @@
 module github.com/hikouki1111/gscraper
 
-go 1.23.1
+go 1.23.5
 
 require github.com/RabiesDev/request-helper v1.0.5
 
