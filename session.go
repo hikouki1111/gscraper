@@ -18,8 +18,8 @@ type Session struct {
 }
 
 func NewSession(client *http.Client) (*Session, error) {
-	req := requests.Get("https://www.google.com/")
-	res, err := requests.Do(client, req)
+	req := requests.MustGet("https://www.google.com/")
+	res, err := client.Do(req)
 	if err != nil {
 		return nil, err
 	}
@@ -41,10 +41,10 @@ func (s *Session) Search(query string, page int, lang language.Tag) ([]Result, e
 	params.Add("start", strconv.Itoa(maxInt(page-1, 0)*10))
 	params.Add("hl", lang.String())
 
-	req := requests.Get(fmt.Sprintf("%s?%s", "https://www.google.com/search", params.Encode()))
+	req := requests.MustGet(fmt.Sprintf("%s?%s", "https://www.google.com/search", params.Encode()))
 	addCookies(req, s.cookies)
 
-	body, res, err := requests.DoAndReadString(s.Client, req)
+	body, res, err := requests.ReadString(s.Client, req)
 	if err != nil {
 		return nil, err
 	}
@@ -69,9 +69,9 @@ func (s *Session) Search(query string, page int, lang language.Tag) ([]Result, e
 		return nil, errors.New("invalid response body or VPN detected")
 	}
 
-	req = requests.Get(fmt.Sprintf("https://www.google.com%s", nextURL))
+	req = requests.MustGet(fmt.Sprintf("https://www.google.com%s", nextURL))
 	addCookies(req, s.cookies)
-	body, res, err = requests.DoAndReadString(s.Client, req)
+	body, res, err = requests.ReadString(s.Client, req)
 	if err != nil {
 		return nil, err
 	}
@@ -126,10 +126,10 @@ func (s *Session) SearchImage(query string, page int, lang language.Tag) ([]Imag
 	params.Add("start", strconv.Itoa(maxInt(page-1, 0)*10))
 	params.Add("hl", lang.String())
 
-	req := requests.Get(fmt.Sprintf("%s?%s", "https://www.google.com/search", params.Encode()))
+	req := requests.MustGet(fmt.Sprintf("%s?%s", "https://www.google.com/search", params.Encode()))
 	addCookies(req, s.cookies)
 
-	body, res, err := requests.DoAndReadString(s.Client, req)
+	body, res, err := requests.ReadString(s.Client, req)
 	if err != nil {
 		return nil, err
 	}
